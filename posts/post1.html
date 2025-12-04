@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 1 - Introducción a los Grafos: Nodos, Aristas y Tipos | Blog Técnico</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <span>Blog Técnico - Estructura de Datos: Grafos</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="post1.html">Post 1</a></li>
+                    <li><a href="post2.html">Post 2</a></li>
+                    <li><a href="post3.html">Post 3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            <article class="article">
+                <!-- HEADER DEL ARTÍCULO -->
+                <div class="article-header">
+                    <h1 class="article-title">🎓 Introducción a los Grafos: Nodos, Aristas y Tipos</h1>
+                    <div class="article-meta">
+                        <span>📅 Publicado: 3 de Diciembre, 2025</span>
+                        <span>⏱️ Lectura: 8 minutos</span>
+                        <span>📖 Parte 1 de 3</span>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO -->
+                <div class="article-content">
+                    <h2>¿Qué es un Grafo?</h2>
+                    <p>
+                        Un <strong>grafo</strong> es una estructura de datos fundamental en ciencias de la computación que representa 
+                        un conjunto de objetos (llamados <strong>vértices</strong> o <strong>nodos</strong>) conectados entre sí por 
+                        <strong>aristas</strong> (también llamadas <strong>ejes</strong> o <strong>enlaces</strong>).
+                    </p>
+                    <p>
+                        Formalmente, un grafo se define como: <strong>G = (V, A)</strong>, donde V es el conjunto de vértices 
+                        y A es el conjunto de aristas que conectan pares de vértices.
+                    </p>
+
+                    <div class="info-box note">
+                        <strong>💡 Dato Interesante:</strong>
+                        Los grafos fueron introducidos por el matemático Leonhard Euler en 1736 cuando resolvió 
+                        el famoso problema de los "Puentes de Königsberg", marcando el inicio de la teoría de grafos.
+                    </div>
+
+                    <h2>Conceptos Clave</h2>
+
+                    <h3>1. Vértices o Nodos</h3>
+                    <p>
+                        Los <strong>vértices</strong> o <strong>nodos</strong> son los elementos fundamentales de un grafo. 
+                        Cada vértice puede representar una entidad, objeto o concepto. Por ejemplo:
+                    </p>
+                    <ul>
+                        <li>En una red social: cada usuario es un vértice</li>
+                        <li>En un mapa de rutas: cada ciudad es un vértice</li>
+                        <li>En un árbol genealógico: cada persona es un vértice</li>
+                    </ul>
+
+                    <h3>2. Aristas o Ejes</h3>
+                    <p>
+                        Las <strong>aristas</strong> o <strong>ejes</strong> son las conexiones entre vértices. 
+                        Representan relaciones o dependencias entre los elementos. Una arista conecta dos vértices 
+                        y puede ser:
+                    </p>
+                    <ul>
+                        <li><strong>Dirigida:</strong> tiene una dirección específica (de un vértice a otro)</li>
+                        <li><strong>No Dirigida:</strong> no tiene dirección, la conexión es bidireccional</li>
+                        <li><strong>Ponderada:</strong> tiene un valor o peso asociado</li>
+                    </ul>
+
+                    <h3>3. Grado de un Vértice</h3>
+                    <p>
+                        El <strong>grado</strong> de un vértice es el número de aristas conectadas a él. En grafos dirigidos, 
+                        se diferencia entre:
+                    </p>
+                    <ul>
+                        <li><strong>Grado de entrada (in-degree):</strong> número de aristas que llegan al vértice</li>
+                        <li><strong>Grado de salida (out-degree):</strong> número de aristas que salen del vértice</li>
+                    </ul>
+
+                    <!-- DIAGRAMA VISUAL: GRAFO NO DIRIGIDO -->
+                    <h2>Ejemplo Visual: Grafo No Dirigido con 5 Nodos</h2>
+                    <p>
+                        A continuación se presenta un grafo no dirigido simple con 5 vértices. 
+                        Este es un ejemplo típico de las redes que estudiaremos:
+                    </p>
+                    
+                    <div class="diagram-container">
+                        <svg id="graph-undirected" width="600" height="400" style="border: 2px solid #2563eb; border-radius: 0.5rem; background: white;">
+                            <!-- Se dibuja mediante JavaScript -->
+                        </svg>
+                    </div>
+
+                    <p style="text-align: center; color: var(--text-light); margin-top: 1rem;">
+                        En este grafo: 5 nodos conectados de diferentes formas, sin direccionalidad
+                    </p>
+
+                    <h2>Tipos de Grafos</h2>
+
+                    <h3>1. Grafos No Dirigidos (Undirected Graphs)</h3>
+                    <p>
+                        En un grafo no dirigido, las aristas no tienen dirección. Si existe una arista entre A y B, 
+                        también existe una conexión de B a A con la misma intensidad.
+                    </p>
+                    <div class="info-box note">
+                        <strong>Ejemplo:</strong> Una red de amigos en redes sociales. Si X es amigo de Y, entonces Y también es amigo de X.
+                    </div>
+
+                    <h3>2. Grafos Dirigidos (Directed Graphs)</h3>
+                    <p>
+                        En un grafo dirigido (también llamado <strong>digrafo</strong>), las aristas tienen una dirección específica. 
+                        Se representan con flechas indicando la dirección.
+                    </p>
+                    <div class="info-box note">
+                        <strong>Ejemplo:</strong> En Twitter, si X sigue a Y, no necesariamente Y sigue a X.
+                    </div>
+
+                    <h3>3. Grafos Ponderados (Weighted Graphs)</h3>
+                    <p>
+                        En un grafo ponderado, cada arista tiene un valor o peso asociado. Este peso puede representar 
+                        distancia, costo, probabilidad, etc.
+                    </p>
+                    <div class="info-box note">
+                        <strong>Ejemplo:</strong> Un mapa de rutas donde las aristas tienen pesos que representan la distancia en kilómetros.
+                    </div>
+
+                    <!-- TABLA COMPARATIVA -->
+                    <h2>Tabla Comparativa de Tipos de Grafos</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Característica</th>
+                                <th>No Dirigido</th>
+                                <th>Dirigido</th>
+                                <th>Ponderado</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Dirección de aristas</td>
+                                <td>Bidireccional</td>
+                                <td>Unidireccional</td>
+                                <td>Bidireccional o Unidireccional</td>
+                            </tr>
+                            <tr>
+                                <td>Peso en aristas</td>
+                                <td>No</td>
+                                <td>No</td>
+                                <td>Sí</td>
+                            </tr>
+                            <tr>
+                                <td>Casos de uso</td>
+                                <td>Redes de amigos, rutas simétricas</td>
+                                <td>Redes sociales, dependencias</td>
+                                <td>Mapas, redes con costos</td>
+                            </tr>
+                            <tr>
+                                <td>Complejidad</td>
+                                <td>Baja</td>
+                                <td>Media</td>
+                                <td>Alta</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Otros Conceptos Importantes</h2>
+
+                    <h3>Camino (Path)</h3>
+                    <p>
+                        Un <strong>camino</strong> es una secuencia de vértices donde cada par consecutivo 
+                        está conectado por una arista. La longitud de un camino es el número de aristas que lo componen.
+                    </p>
+
+                    <h3>Ciclo (Cycle)</h3>
+                    <p>
+                        Un <strong>ciclo</strong> es un camino que comienza y termina en el mismo vértice, 
+                        sin repetir ningún otro vértice. Si un grafo no contiene ciclos, se denomina <strong>grafo acíclico</strong>.
+                    </p>
+
+                    <h3>Grafo Conexo</h3>
+                    <p>
+                        Un grafo es <strong>conexo</strong> si existe un camino entre cualquier par de vértices. 
+                        Si no es conexo, se dice que tiene <strong>componentes conexas</strong>.
+                    </p>
+
+                    <h3>Grafo Completo</h3>
+                    <p>
+                        Un grafo es <strong>completo</strong> si existe una arista entre cada par de vértices diferentes. 
+                        Un grafo completo con n vértices se denota como K<sub>n</sub>.
+                    </p>
+
+                    <div class="info-box success">
+                        <strong>✅ Resumen:</strong>
+                        Un grafo es una estructura versátil que modela relaciones entre entidades. 
+                        Existen múltiples tipos según si las aristas tienen dirección y peso, 
+                        y cada tipo se adapta mejor a diferentes problemas.
+                    </div>
+
+                    <h2>Importancia de los Grafos</h2>
+                    <p>
+                        Los grafos son fundamentales en ciencias de la computación por varias razones:
+                    </p>
+                    <ul>
+                        <li><strong>Modelado de sistemas complejos:</strong> Permiten representar y analizar sistemas del mundo real</li>
+                        <li><strong>Resolución de problemas:</strong> Son la base para resolver problemas de optimización, búsqueda y planificación</li>
+                        <li><strong>Análisis de redes:</strong> Críticos para entender redes sociales, de transporte, de computadoras</li>
+                        <li><strong>Inteligencia Artificial:</strong> Fundamentales en algoritmos de búsqueda y planificación</li>
+                        <li><strong>Aplicaciones reales:</strong> Mapas de navegación, recomendaciones, análisis de dependencias</li>
+                    </ul>
+
+                    <h2>Ventajas de Estudiar Grafos</h2>
+                    <div class="info-box note">
+                        <strong>🎯 Mejora de habilidades:</strong>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Pensamiento abstracto: Aprendes a modelar problemas complejos</li>
+                            <li>Análisis de algoritmos: Entiendes cómo medir eficiencia</li>
+                            <li>Optimización: Desarrollas capacidad de resolver problemas de forma óptima</li>
+                            <li>Potencial laboral: Competencia requerida en empresas tech</li>
+                        </ul>
+                    </div>
+
+                    <h2>Ejemplos Prácticos Detallados</h2>
+
+                    <h3>Ejemplo 1: Red Social (Facebook)</h3>
+                    <p>
+                        En una red social como Facebook, los usuarios son <strong>nodos</strong> y las amistades son <strong>aristas no dirigidas</strong>.
+                    </p>
+                    <div class="code-block">
+# Representación simplificada
+Red Social = {
+    usuarios: [Juan, María, Carlos, Ana, Luis],
+    amistades: [
+        (Juan, María),      # Juan es amigo de María
+        (Juan, Carlos),     # Juan es amigo de Carlos
+        (María, Ana),       # María es amiga de Ana
+        (Carlos, Luis),     # Carlos es amigo de Luis
+        (Ana, Luis)         # Ana es amiga de Luis
+    ]
+}
+
+# Propiedades:
+- Tipo: NO DIRIGIDO (si Juan es amigo de María, María es amiga de Juan)
+- Ponderado: NO (todas las amistades tienen igual importancia)
+- Conexo: SÍ (todos pueden conectarse a través de amistades)
+                    </div>
+
+                    <h3>Ejemplo 2: Sistema de Navegación GPS (Google Maps)</h3>
+                    <p>
+                        En un mapa de rutas, las ciudades son <strong>nodos</strong> y las carreteras son <strong>aristas ponderadas</strong>.
+                    </p>
+                    <div class="code-block">
+# Representación de rutas entre ciudades
+Mapa = {
+    ciudades: [Madrid, Barcelona, Valencia, Sevilla, Bilbao],
+    rutas: [
+        (Madrid, Barcelona, 620km),      # Distancia: 620 km
+        (Madrid, Valencia, 350km),       # Distancia: 350 km
+        (Barcelona, Valencia, 360km),    # Distancia: 360 km
+        (Madrid, Sevilla, 540km),        # Distancia: 540 km
+        (Sevilla, Valencia, 490km)       # Distancia: 490 km
+    ]
+}
+
+# Propiedades:
+- Tipo: NO DIRIGIDO (puedes ir de Madrid a Barcelona y viceversa)
+- Ponderado: SÍ (cada ruta tiene una distancia diferente)
+- Caso: Encontrar ruta más corta (Algoritmo de Dijkstra)
+                    </div>
+
+                    <h3>Ejemplo 3: Dependencias en Proyectos (Desarrollo de Software)</h3>
+                    <p>
+                        En un proyecto de software, las tareas son <strong>nodos</strong> y las dependencias son <strong>aristas dirigidas</strong>.
+                    </p>
+                    <div class="code-block">
+# Proyecto: Desarrollo de una app
+Proyecto = {
+    tareas: [
+        Diseño, Backend, Frontend, Testing, Despliegue
+    ],
+    dependencias: [
+        Diseño → Backend,        # Backend depende de Diseño
+        Diseño → Frontend,       # Frontend depende de Diseño
+        Backend → Testing,       # Testing depende de Backend
+        Frontend → Testing,      # Testing depende de Frontend
+        Testing → Despliegue     # Despliegue depende de Testing
+    ]
+}
+
+# Propiedades:
+- Tipo: DIRIGIDO (Despliegue no puede ocurrir antes de Testing)
+- Ponderado: NO (no tiene asociado un costo)
+- Caso: Ordenamiento topológico (en qué orden hacer las tareas)
+                    </div>
+
+                    <h3>Ejemplo 4: Redes de Computadoras (Internet)</h3>
+                    <p>
+                        Los routers son <strong>nodos</strong> y las conexiones de red son <strong>aristas ponderadas dirigidas</strong>.
+                    </p>
+                    <div class="code-block">
+# Red de computadoras
+Internet = {
+    routers: [Router_A, Router_B, Router_C, Router_D],
+    conexiones: [
+        (Router_A → Router_B, velocidad: 1Gbps, latencia: 5ms),
+        (Router_B → Router_C, velocidad: 500Mbps, latencia: 10ms),
+        (Router_A → Router_D, velocidad: 100Mbps, latencia: 20ms),
+        (Router_D → Router_C, velocidad: 250Mbps, latencia: 8ms)
+    ]
+}
+
+# Propiedades:
+- Tipo: DIRIGIDO (el flujo de datos es unidireccional)
+- Ponderado: SÍ (tiene velocidad y latencia)
+- Caso: Encontrar ruta más rápida para transmitir datos
+                    </div>
+
+                    <h3>Ejemplo 5: Red Biológica (Cadena Alimenticia)</h3>
+                    <p>
+                        Los organismos son <strong>nodos</strong> y las relaciones de depredador-presa son <strong>aristas dirigidas</strong>.
+                    </p>
+                    <div class="code-block">
+# Cadena alimenticia
+CadenaAlimenticia = {
+    organismos: [Planta, Conejo, Zorro, Águila],
+    relaciones: [
+        Planta → Conejo,      # El conejo come plantas
+        Conejo → Zorro,       # El zorro come conejos
+        Conejo → Águila,      # El águila come conejos
+        Zorro → Águila        # El águila come zorros
+    ]
+}
+
+# Propiedades:
+- Tipo: DIRIGIDO (la energía fluye en una dirección)
+- Ponderado: NO (no tiene valor asociado en este análisis básico)
+- Caso: Analizar flujo de energía en ecosistemas
+                    </div>
+
+                    <h2>Próximas Lecciones</h2>
+                    <p>
+                        En el próximo post aprenderemos sobre las <strong>dos principales formas de representar grafos</strong> 
+                        en la memoria de una computadora: listas de adyacencia y matrices de adyacencia. 
+                        Veremos cómo cada representación tiene ventajas y desventajas según el caso de uso.
+                    </p>
+
+                    <div class="btn-group">
+                        <a href="../index.html" class="btn btn-secondary">← Volver al Inicio</a>
+                        <a href="post2.html" class="btn btn-primary">Ir al Post 2 →</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../index.html">Inicio</a>
+                <a href="post1.html">Post 1</a>
+                <a href="post2.html">Post 2</a>
+                <a href="post3.html">Post 3</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Blog Técnico - Estructura de Datos: Grafos</p>
+                <p>Creado por Deisy Katherinne Ramirez | Estructuras de datos II - UNINCCA</p>
+                <p>Parte 1 de 3 - Introducción a los Grafos: Nodos, Aristas y Tipos</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN SCROLL TO TOP FLOTANTE -->
+    <button id="scrollToTopBtn" title="Volver al inicio">⬆️</button>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Dibujar el grafo no dirigido en la página
+        const undirectedGraphNodes = [
+            { x: 300, y: 50, label: 'A' },
+            { x: 450, y: 150, label: 'B' },
+            { x: 450, y: 300, label: 'C' },
+            { x: 300, y: 350, label: 'D' },
+            { x: 150, y: 300, label: 'E' }
+        ];
+
+        const undirectedGraphEdges = [
+            { from: 0, to: 1, directed: false },
+            { from: 0, to: 4, directed: false },
+            { from: 1, to: 2, directed: false },
+            { from: 2, to: 3, directed: false },
+            { from: 3, to: 4, directed: false },
+            { from: 1, to: 3, directed: false }
+        ];
+
+        drawSimpleGraph('graph-undirected', undirectedGraphNodes, undirectedGraphEdges);
+    </script>
+</body>
+</html>

@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 3 - Algoritmos Fundamentales de Recorrido | Blog Técnico</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <span>Blog Técnico - Estructura de Datos: Grafos</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="post1.html">Post 1</a></li>
+                    <li><a href="post2.html">Post 2</a></li>
+                    <li><a href="post3.html">Post 3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            <article class="article">
+                <!-- HEADER DEL ARTÍCULO -->
+                <div class="article-header">
+                    <h1 class="article-title">🔍 Algoritmos Fundamentales de Recorrido: BFS y DFS</h1>
+                    <div class="article-meta">
+                        <span>📅 Publicado: 3 de Diciembre, 2025</span>
+                        <span>⏱️ Lectura: 12 minutos</span>
+                        <span>🔍 Parte 3 de 3</span>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO -->
+                <div class="article-content">
+                    <h2>Introducción</h2>
+                    <p>
+                        Los dos algoritmos más fundamentales para trabajar con grafos son 
+                        <strong>Búsqueda en Amplitud (BFS)</strong> y <strong>Búsqueda en Profundidad (DFS)</strong>. 
+                        Estos algoritmos permiten explorar todos los vértices y aristas de un grafo de manera sistemática.
+                    </p>
+                    <p>
+                        Ambos algoritmos son la base para resolver muchos problemas complejos como encontrar caminos, 
+                        detectar ciclos, encontrar componentes conexas, y mucho más.
+                    </p>
+
+                    <h2>1. Búsqueda en Amplitud (BFS - Breadth-First Search)</h2>
+
+                    <h3>¿Qué es BFS?</h3>
+                    <p>
+                        <strong>BFS</strong> es un algoritmo de recorrido que explora el grafo nivel por nivel. 
+                        Comienza en un vértice inicial y visita todos sus vecinos antes de pasar a los vecinos de esos vecinos.
+                    </p>
+
+                    <div class="info-box note">
+                        <strong>💡 Analogía:</strong>
+                        Imagina que lanzas una piedra en un estanque. Las ondas se expanden en círculos concéntricos, 
+                        visitando primero los puntos más cercanos. Así funciona BFS.
+                    </div>
+
+                    <h3>Estructura de Datos</h3>
+                    <p>
+                        BFS utiliza una <strong>cola (queue)</strong> para mantener el orden de los vértices a visitar. 
+                        El proceso es FIFO: primero entra, primero sale.
+                    </p>
+
+                    <h3>Algoritmo paso a paso</h3>
+                    <ol>
+                        <li>Marcar el vértice inicial como visitado e insertarlo en la cola</li>
+                        <li>Mientras la cola no esté vacía:
+                            <ul>
+                                <li>Desencolar el primer vértice</li>
+                                <li>Para cada vecino no visitado del vértice actual:
+                                    <ul>
+                                        <li>Marcarlo como visitado</li>
+                                        <li>Encolarlo</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Finalizar cuando la cola esté vacía</li>
+                    </ol>
+
+                    <h3>Implementación en Python</h3>
+                    <div class="code-block">
+from collections import deque
+
+def bfs(grafo, inicio):
+    """
+    Realiza BFS en un grafo representado como lista de adyacencia
+    
+    Args:
+        grafo: diccionario con la lista de adyacencia
+        inicio: vértice inicial
+    
+    Returns:
+        lista con el orden de visita de los vértices
+    """
+    visitados = set()
+    cola = deque([inicio])
+    resultado = []
+    
+    visitados.add(inicio)
+    
+    while cola:
+        vertice = cola.popleft()
+        resultado.append(vertice)
+        
+        for vecino in grafo[vertice]:
+            if vecino not in visitados:
+                visitados.add(vecino)
+                cola.append(vecino)
+    
+    return resultado
+
+# Uso
+grafo = {
+    'A': ['B', 'D'],
+    'B': ['A', 'C'],
+    'C': ['B', 'D'],
+    'D': ['A', 'C']
+}
+
+print(bfs(grafo, 'A'))  # ['A', 'B', 'D', 'C']
+                    </div>
+
+                    <h3>Visualización de BFS</h3>
+                    <div class="diagram-container">
+                        <svg id="graph-bfs" width="600" height="400" style="border: 2px solid #2563eb; border-radius: 0.5rem; background: white;"></svg>
+                    </div>
+
+                    <p style="text-align: center; color: var(--text-light); margin-top: 1rem;">
+                        <strong>Orden de visita BFS desde A:</strong> A → B → D → C
+                    </p>
+
+                    <h3>Complejidad de BFS</h3>
+                    <ul>
+                        <li><strong>Tiempo:</strong> O(V + A) - visita cada vértice una vez y cada arista una vez</li>
+                        <li><strong>Espacio:</strong> O(V) - por la cola y el conjunto de visitados</li>
+                    </ul>
+
+                    <h3>Casos de Uso de BFS</h3>
+                    <ul>
+                        <li>🔍 Encontrar el camino más corto en grafos sin pesos</li>
+                        <li>🔍 Encontrar todas las componentes conexas</li>
+                        <li>🔍 Detectar ciclos en grafos no dirigidos</li>
+                        <li>🔍 Análisis de niveles en árboles</li>
+                        <li>🔍 Algoritmo de Dijkstra (fundamento)</li>
+                    </ul>
+
+                    <div class="info-box success">
+                        <strong>✅ Ventajas de BFS:</strong>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Encuentra el camino más corto garantizado</li>
+                            <li>Explora de manera uniforme (nivel por nivel)</li>
+                            <li>Excelente para grafos con distancias uniformes</li>
+                        </ul>
+                    </div>
+
+                    <h2>Importancia de BFS</h2>
+                    <p>
+                        BFS es fundamental en muchas aplicaciones del mundo real:
+                    </p>
+                    <ul>
+                        <li>🗺️ <strong>Navegación GPS:</strong> Encontrar la ruta más corta (número de pasos)</li>
+                        <li>🌐 <strong>Redes sociales:</strong> Encontrar amigos a cierta distancia</li>
+                        <li>🎮 <strong>Videojuegos:</strong> IA para movimento de personajes</li>
+                        <li>🤖 <strong>Robótica:</strong> Planificación de movimiento</li>
+                    </ul>
+
+                    <h3>Ejemplo Práctico BFS: Encontrar Grados de Separación</h3>
+                    <div class="code-block">
+# Red social: ¿Cuántos grados de separación hay entre Juan y Zoe?
+amigos = {
+    'Juan': ['María', 'Carlos'],
+    'María': ['Juan', 'Ana'],
+    'Carlos': ['Juan', 'Luis'],
+    'Ana': ['María', 'Diego'],
+    'Luis': ['Carlos', 'Zoe'],
+    'Diego': ['Ana'],
+    'Zoe': ['Luis', 'Pedro'],
+    'Pedro': ['Zoe']
+}
+
+def grados_separacion_bfs(grafo, inicio, destino):
+    """
+    Encuentra el camino más corto (menor número de grados)
+    usando BFS
+    """
+    visitados = {inicio}
+    cola = [(inicio, [inicio])]
+    
+    while cola:
+        persona, camino = cola.pop(0)
+        
+        if persona == destino:
+            return camino
+        
+        for amigo in grafo.get(persona, []):
+            if amigo not in visitados:
+                visitados.add(amigo)
+                cola.append((amigo, camino + [amigo]))
+    
+    return None
+
+# Uso
+camino = grados_separacion_bfs(amigos, 'Juan', 'Zoe')
+print(f"Camino: {camino}")  # ['Juan', 'Carlos', 'Luis', 'Zoe']
+print(f"Grados de separación: {len(camino) - 1}")  # 3 grados
+                    </div>
+
+                    <h2>Ventajas de DFS</h2>
+
+                    <h3>¿Qué es DFS?</h3>
+                    <p>
+                        <strong>DFS</strong> es un algoritmo de recorrido que explora el grafo en profundidad, 
+                        adentrándose en el árbol de búsqueda todo lo posible antes de retroceder.
+                    </p>
+
+                    <div class="info-box note">
+                        <strong>💡 Analogía:</strong>
+                        Imagina explorar un laberinto: entras por una puerta, sigues un camino lo más lejos posible, 
+                        y si llegas a un callejón sin salida, retrocedes para probar otro camino.
+                    </div>
+
+                    <h3>Estructura de Datos</h3>
+                    <p>
+                        DFS puede implementarse usando una <strong>pila (stack)</strong> o recursión. 
+                        El proceso es LIFO: último entra, primero sale.
+                    </p>
+
+                    <h3>Algoritmo paso a paso (Iterativo)</h3>
+                    <ol>
+                        <li>Marcar el vértice inicial como visitado e insertarlo en la pila</li>
+                        <li>Mientras la pila no esté vacía:
+                            <ul>
+                                <li>Desapilar el último vértice</li>
+                                <li>Para cada vecino no visitado del vértice actual:
+                                    <ul>
+                                        <li>Marcarlo como visitado</li>
+                                        <li>Apilarlo</li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        <li>Finalizar cuando la pila esté vacía</li>
+                    </ol>
+
+                    <h3>Implementación en Python (Iterativa)</h3>
+                    <div class="code-block">
+def dfs_iterativo(grafo, inicio):
+    """
+    Realiza DFS iterativo en un grafo
+    """
+    visitados = set()
+    pila = [inicio]
+    resultado = []
+    
+    while pila:
+        vertice = pila.pop()
+        
+        if vertice not in visitados:
+            visitados.add(vertice)
+            resultado.append(vertice)
+            
+            # Agregar vecinos a la pila (al revés para mantener orden)
+            for vecino in reversed(grafo[vertice]):
+                if vecino not in visitados:
+                    pila.append(vecino)
+    
+    return resultado
+
+# Uso
+print(dfs_iterativo(grafo, 'A'))  # ['A', 'B', 'C', 'D']
+                    </div>
+
+                    <h3>Implementación en Python (Recursiva)</h3>
+                    <div class="code-block">
+def dfs_recursivo(grafo, vertice, visitados=None):
+    """
+    Realiza DFS recursivo en un grafo
+    """
+    if visitados is None:
+        visitados = set()
+    
+    visitados.add(vertice)
+    resultado = [vertice]
+    
+    for vecino in grafo[vertice]:
+        if vecino not in visitados:
+            resultado.extend(dfs_recursivo(grafo, vecino, visitados))
+    
+    return resultado
+
+# Uso
+print(dfs_recursivo(grafo, 'A'))  # ['A', 'B', 'C', 'D']
+                    </div>
+
+                    <h3>Visualización de DFS</h3>
+                    <div class="diagram-container">
+                        <svg id="graph-dfs" width="600" height="400" style="border: 2px solid #ef4444; border-radius: 0.5rem; background: white;"></svg>
+                    </div>
+
+                    <p style="text-align: center; color: var(--text-light); margin-top: 1rem;">
+                        <strong>Orden de visita DFS desde A:</strong> A → B → C → D
+                    </p>
+
+                    <h3>Complejidad de DFS</h3>
+                    <ul>
+                        <li><strong>Tiempo:</strong> O(V + A) - visita cada vértice una vez y cada arista una vez</li>
+                        <li><strong>Espacio:</strong> O(V) - por la pila (o la pila de recursión)</li>
+                    </ul>
+
+                    <h3>Casos de Uso de DFS</h3>
+                    <ul>
+                        <li>🔍 Detectar ciclos en grafos dirigidos</li>
+                        <li>🔍 Ordenamiento topológico</li>
+                        <li>🔍 Encontrar puntos de articulación (cut vertices)</li>
+                        <li>🔍 Encontrar puentes en grafos</li>
+                        <li>🔍 Exploración de laberintos</li>
+                        <li>🔍 Resolución de puzzles</li>
+                    </ul>
+
+                    <div class="info-box success">
+                        <strong>✅ Ventajas de DFS:</strong>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Utiliza menos memoria en algunas implementaciones</li>
+                            <li>Excelente para detectar ciclos</li>
+                            <li>Más fácil de implementar recursivamente</li>
+                        </ul>
+                    </div>
+
+                    <h2>Comparativa: BFS vs DFS</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Aspecto</th>
+                                <th>BFS</th>
+                                <th>DFS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Estructura de datos</td>
+                                <td>Cola (FIFO)</td>
+                                <td>Pila (LIFO)</td>
+                            </tr>
+                            <tr>
+                                <td>Orden de exploración</td>
+                                <td>Por niveles</td>
+                                <td>En profundidad</td>
+                            </tr>
+                            <tr>
+                                <td>Complejidad temporal</td>
+                                <td>O(V + A)</td>
+                                <td>O(V + A)</td>
+                            </tr>
+                            <tr>
+                                <td>Complejidad espacial</td>
+                                <td>O(V)</td>
+                                <td>O(V)</td>
+                            </tr>
+                            <tr>
+                                <td>Camino más corto</td>
+                                <td>✓ Garantizado</td>
+                                <td>✗ No garantizado</td>
+                            </tr>
+                            <tr>
+                                <td>Detectar ciclos</td>
+                                <td>✓ Sí</td>
+                                <td>✓ Sí (más fácil)</td>
+                            </tr>
+                            <tr>
+                                <td>Recursión natural</td>
+                                <td>✗ No</td>
+                                <td>✓ Sí</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Ejemplo Completo: Aplicación Práctica</h2>
+                    <p>
+                        Imaginemos una red de ciudades conectadas por carreteras. Queremos saber si todas 
+                        las ciudades están conectadas (componentes conexas).
+                    </p>
+
+                    <div class="code-block">
+def contar_componentes_conexas(grafo):
+    """
+    Cuenta el número de componentes conexas usando DFS
+    """
+    visitados = set()
+    componentes = 0
+    
+    def dfs(v):
+        visitados.add(v)
+        for vecino in grafo[v]:
+            if vecino not in visitados:
+                dfs(vecino)
+    
+    for vertice in grafo:
+        if vertice not in visitados:
+            dfs(vertice)
+            componentes += 1
+    
+    return componentes
+
+# Ejemplo: Grafo con 2 componentes conexas
+grafo = {
+    'A': ['B'],
+    'B': ['A'],
+    'C': ['D'],
+    'D': ['C']
+}
+
+print(contar_componentes_conexas(grafo))  # 2
+                    </div>
+
+                    <h2>Conclusión</h2>
+                    <p>
+                        BFS y DFS son algoritmos fundamentales que todo programador debe dominar. 
+                        Aunque tienen la misma complejidad, cada uno es más apropiado para diferentes escenarios:
+                    </p>
+                    <ul>
+                        <li><strong>BFS</strong> para encontrar caminos más cortos y exploración sistemática por niveles</li>
+                        <li><strong>DFS</strong> para detectar ciclos, ordenamiento topológico y exploración profunda</li>
+                    </ul>
+
+                    <div class="info-box success">
+                        <strong>✅ Consejos finales:</strong>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>Practica implementando ambos algoritmos hasta que los entiendas completamente</li>
+                            <li>Entiende la diferencia entre implementación iterativa y recursiva</li>
+                            <li>Memoriza sus casos de uso y complejidades</li>
+                            <li>Estos algoritmos son base para muchos otros (Dijkstra, Kruskal, etc.)</li>
+                        </ul>
+                    </div>
+
+                    <h2>Casos de Uso Avanzados</h2>
+
+                    <h3>Caso 1: Análisis de Componentes Fuertemente Conexas</h3>
+                    <p>
+                        En un grafo dirigido, una componente fuertemente conexa es un conjunto de vértices 
+                        donde cada vértice es accesible desde todos los otros.
+                    </p>
+                    <div class="code-block">
+# Ejemplo: Ruta de vuelos (¿Puedo ir de A a B y luego volver a A?)
+rutas = {
+    'Madrid': ['París'],
+    'París': ['Berlín'],
+    'Berlín': ['Madrid'],  # Componente fuertemente conexa
+    'Roma': ['Milán'],
+    'Milán': []  # No conecta con Madrid-París-Berlín
+}
+
+# Componentes fuertemente conexas: 
+# 1. {Madrid, París, Berlín}
+# 2. {Roma, Milán}
+# 3. {}
+                    </div>
+
+                    <h3>Caso 2: Análisis de Redes Informáticas</h3>
+                    <div class="code-block">
+# Detectar servidores críticos (puentes)
+# Un puente es una arista cuya eliminación desconecta el grafo
+
+servidores = {
+    'A': ['B'],
+    'B': ['C', 'D'],
+    'C': ['A'],
+    'D': ['E'],
+    'E': ['D']
+}
+
+# Puentes: ('B', 'D') - si falla esta conexión, E se aisla
+                    </div>
+
+                    <h3>Caso 3: Resolución de Laberintos</h3>
+                    <div class="code-block">
+# Usando DFS para resolver un laberinto
+laberinto = [
+    ['#', '#', '#', '#', '#'],
+    ['#', 'S', ' ', ' ', '#'],
+    ['#', '#', ' ', '#', '#'],
+    ['#', ' ', ' ', ' ', 'E'],
+    ['#', '#', '#', '#', '#']
+]
+
+# DFS es ideal porque:
+# 1. Explora a fondo antes de retroceder
+# 2. Usa menos memoria que BFS
+# 3. Fácil de implementar recursivamente
+
+def resolver_laberinto(laberinto, inicio, fin):
+    """Encuentra camino usando DFS"""
+    visitados = set()
+    camino = []
+    
+    def dfs(x, y):
+        if (x, y) == fin:
+            return True
+        
+        if (x, y) in visitados or x < 0 or y < 0:
+            return False
+        
+        if laberinto[x][y] == '#':
+            return False
+        
+        visitados.add((x, y))
+        camino.append((x, y))
+        
+        # Probar 4 direcciones
+        for dx, dy in [(0, 1), (1, 0), (0, -1), (-1, 0)]:
+            if dfs(x + dx, y + dy):
+                return True
+        
+        return False
+    
+    if dfs(inicio[0], inicio[1]):
+        return camino
+    return None
+                    </div>
+
+                    <h2>Resumen: ¿Cuándo Usar Cada Uno?</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Problema</th>
+                                <th>Algoritmo</th>
+                                <th>Razón</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Camino más corto en grafo sin pesos</td>
+                                <td>BFS</td>
+                                <td>Garantiza la ruta con menos aristas</td>
+                            </tr>
+                            <tr>
+                                <td>Detectar ciclos</td>
+                                <td>DFS</td>
+                                <td>Más eficiente para encontrar back edges</td>
+                            </tr>
+                            <tr>
+                                <td>Encontrar grados de separación</td>
+                                <td>BFS</td>
+                                <td>Explora por niveles, perfecto para distancias</td>
+                            </tr>
+                            <tr>
+                                <td>Ordenamiento topológico</td>
+                                <td>DFS</td>
+                                <td>Ideal para procesamiento de dependencias</td>
+                            </tr>
+                            <tr>
+                                <td>Explorar laberintos</td>
+                                <td>DFS</td>
+                                <td>Usa menos memoria, recorrido profundo</td>
+                            </tr>
+                            <tr>
+                                <td>Análisis de componentes conexas</td>
+                                <td>Ambos</td>
+                                <td>Ambos funcionan, elige por eficiencia</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="btn-group">
+                        <a href="post2.html" class="btn btn-secondary">← Post 2</a>
+                        <a href="../index.html" class="btn btn-primary">Volver al Inicio</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../index.html">Inicio</a>
+                <a href="post1.html">Post 1</a>
+                <a href="post2.html">Post 2</a>
+                <a href="post3.html">Post 3</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Blog Técnico - Estructura de Datos: Grafos</p>
+                <p>Creado por Deisy Katherinne Ramirez | Estructuras de datos II - UNINCCA</p>
+                <p>Parte 3 de 3 - Algoritmos Fundamentales de Recorrido: BFS y DFS</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN SCROLL TO TOP FLOTANTE -->
+    <button id="scrollToTopBtn" title="Volver al inicio">⬆️</button>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Dibujar grafos para BFS y DFS
+        const graphNodes = [
+            { x: 100, y: 100, label: 'A' },
+            { x: 300, y: 100, label: 'B' },
+            { x: 300, y: 250, label: 'C' },
+            { x: 100, y: 250, label: 'D' }
+        ];
+
+        const graphEdges = [
+            { from: 0, to: 1, directed: false },
+            { from: 0, to: 3, directed: false },
+            { from: 1, to: 2, directed: false },
+            { from: 2, to: 3, directed: false }
+        ];
+
+        // Guardar datos del grafo para animaciones
+        window.currentGraphData = {
+            adjacencyList: {
+                0: [1, 3],
+                1: [0, 2],
+                2: [1, 3],
+                3: [0, 2]
+            }
+        };
+
+        drawSimpleGraph('graph-bfs', graphNodes, graphEdges);
+        drawSimpleGraph('graph-dfs', graphNodes, graphEdges);
+    </script>
+</body>
+</html>

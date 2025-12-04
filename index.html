@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog Técnico - Estructura de Datos: Grafos</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <span>Blog Técnico - Estructura de Datos: Grafos</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Inicio</a></li>
+                    <li><a href="posts/post1.html">Post 1</a></li>
+                    <li><a href="posts/post2.html">Post 2</a></li>
+                    <li><a href="posts/post3.html">Post 3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            <!-- HERO SECTION -->
+            <section class="hero">
+                <h1>📊 Estructura de Datos: Grafos</h1>
+                <p>Domina los conceptos fundamentales, representaciones avanzadas y algoritmos esenciales de grafos</p>
+            </section>
+
+            <!-- INTRODUCCIÓN AL BLOG -->
+            <section class="article" style="margin-bottom: 3rem;">
+                <div style="text-align: center; border-bottom: 3px solid var(--primary-color); padding-bottom: 2rem; margin-bottom: 2rem;">
+                    <h2 style="color: var(--primary-color); font-size: 1.8rem;">📚 Bienvenido al Blog Técnico de Grafos</h2>
+                </div>
+                
+                <div class="article-content">
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                        Los <strong>grafos</strong> son una de las estructuras de datos más poderosas y versátiles en ciencias de la computación. 
+                        Desde redes sociales hasta sistemas de navegación, desde análisis de dependencias hasta inteligencia artificial, 
+                        los grafos están presentes en prácticamente todas las aplicaciones modernas.
+                    </p>
+
+                    <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+                        Este blog técnico ha sido creado especialmente para estudiantes y profesionales que desean comprender a profundidad 
+                        cómo funcionan los grafos, cómo representarlos eficientemente en memoria y cómo aplicar algoritmos esenciales 
+                        para resolver problemas del mundo real.
+                    </p>
+
+                    <div style="background: linear-gradient(135deg, #eff6ff 0%, #f0f9ff 100%); padding: 2rem; border-radius: 0.5rem; border-left: 4px solid var(--primary-color); margin: 2rem 0;">
+                        <h3 style="color: var(--primary-color); margin-bottom: 1rem;">🎯 ¿Qué Aprenderás?</h3>
+                        <ul style="font-size: 1.05rem; line-height: 1.8; margin: 0;">
+                            <li>✨ <strong>Conceptos Fundamentales:</strong> Definición de grafos, nodos, aristas, tipos y propiedades</li>
+                            <li>💡 <strong>Aplicaciones Prácticas:</strong> Ejemplos del mundo real en redes sociales, navegación, y más</li>
+                            <li>💾 <strong>Representaciones Eficientes:</strong> Listas de adyacencia vs matrices de adyacencia</li>
+                            <li>🔍 <strong>Algoritmos Esenciales:</strong> BFS y DFS con casos de uso avanzados</li>
+                            <li>📊 <strong>Análisis de Complejidad:</strong> Comprende la eficiencia de cada approach</li>
+                            <li>🚀 <strong>Casos Complejos:</strong> Detección de ciclos, ordenamiento topológico, componentes conexas</li>
+                        </ul>
+                    </div>
+
+                    <h3 style="color: var(--primary-color); margin-top: 2rem; margin-bottom: 1rem; font-size: 1.3rem;">📖 Estructura del Blog</h3>
+                    <p style="font-size: 1.05rem; line-height: 1.8;">
+                        Este blog está organizado en <strong>3 artículos progresivos</strong>, cada uno construyendo sobre los conceptos anteriores:
+                    </p>
+
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; margin-top: 1.5rem;">
+                        <!-- Post 1 Preview -->
+                        <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; border-top: 4px solid #2563eb;">
+                            <h4 style="color: #2563eb; margin-bottom: 0.8rem;">📖 Post 1: Introducción</h4>
+                            <p style="font-size: 0.95rem; color: var(--text-light); margin-bottom: 1rem;">
+                                Aprenderás qué son los grafos, sus componentes fundamentales y los tipos que existen. 
+                                Incluye 5 ejemplos prácticos del mundo real.
+                            </p>
+                            <p style="font-size: 0.9rem; color: var(--primary-color); font-weight: bold;">→ Nivel: Principiante</p>
+                        </div>
+
+                        <!-- Post 2 Preview -->
+                        <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; border-top: 4px solid #f59e0b;">
+                            <h4 style="color: #f59e0b; margin-bottom: 0.8rem;">💾 Post 2: Representación</h4>
+                            <p style="font-size: 0.95rem; color: var(--text-light); margin-bottom: 1rem;">
+                                Domina las dos formas principales de almacenar grafos con análisis de complejidad 
+                                y 5 ejemplos comparativos.
+                            </p>
+                            <p style="font-size: 0.9rem; color: #f59e0b; font-weight: bold;">→ Nivel: Intermedio</p>
+                        </div>
+
+                        <!-- Post 3 Preview -->
+                        <div style="background: white; padding: 1.5rem; border-radius: 0.5rem; border-top: 4px solid #ef4444;">
+                            <h4 style="color: #ef4444; margin-bottom: 0.8rem;">🔍 Post 3: Algoritmos</h4>
+                            <p style="font-size: 0.95rem; color: var(--text-light); margin-bottom: 1rem;">
+                                Domina BFS y DFS con casos de uso avanzados como detección de ciclos 
+                                y ordenamiento topológico.
+                            </p>
+                            <p style="font-size: 0.9rem; color: #ef4444; font-weight: bold;">→ Nivel: Avanzado</p>
+                        </div>
+                    </div>
+
+                    <div style="background: #ecfdf5; padding: 1.5rem; border-radius: 0.5rem; border-left: 4px solid var(--success-color); margin-top: 2rem;">
+                        <h3 style="color: var(--success-color); margin-bottom: 0.8rem;">✅ ¿Por Qué Este Blog?</h3>
+                        <ul style="font-size: 1rem; line-height: 1.8; margin: 0;">
+                            <li>✨ Contenido técnico de alta calidad con explicaciones claras</li>
+                            <li>💡 Ejemplos prácticos del mundo real, no solo teoría</li>
+                            <li>📊 Código Python completamente funcional</li>
+                            <li>🎯 Progresión lógica: básico → intermedio → avanzado</li>
+                            <li>🚀 Casos de uso reales que encontrarás en entrevistas técnicas</li>
+                        </ul>
+                    </div>
+
+                    <p style="font-size: 1rem; line-height: 1.8; margin-top: 2rem; text-align: center; color: var(--text-light);">
+                        <strong>¿Listo para dominar los grafos?</strong> Comienza con el Post 1 y sigue tu viaje de aprendizaje. 
+                        Cada post se construye sobre los conceptos anteriores.
+                    </p>
+                </div>
+            </section>
+
+            <!-- POSTS GRID -->
+            <section class="posts-grid">
+                <!-- POST 1 -->
+                <article class="post-card">
+                    <div class="post-card-image">📚</div>
+                    <div class="post-card-content">
+                        <h2 class="post-card-title">Introducción a los Grafos: Nodos, Aristas y Tipos</h2>
+                        <p class="post-card-excerpt">Aprende qué son los grafos, sus componentes fundamentales (nodos y aristas), tipos de grafos, importancia y aplicaciones prácticas del mundo real.</p>
+                        <div class="post-card-meta">
+                            <span>📖 Parte 1 de 3</span>
+                            <a href="posts/post1.html" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- POST 2 -->
+                <article class="post-card">
+                    <div class="post-card-image">💾</div>
+                    <div class="post-card-content">
+                        <h2 class="post-card-title">Representación de Grafos</h2>
+                        <p class="post-card-excerpt">Descubre las dos principales formas de almacenar grafos: listas de adyacencia y matrices de adyacencia con ejemplos comparativos y análisis de complejidad.</p>
+                        <div class="post-card-meta">
+                            <span>💾 Parte 2 de 3</span>
+                            <a href="posts/post2.html" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+
+                <!-- POST 3 -->
+                <article class="post-card">
+                    <div class="post-card-image">🔍</div>
+                    <div class="post-card-content">
+                        <h2 class="post-card-title">Algoritmos Fundamentales de Recorrido: BFS y DFS</h2>
+                        <p class="post-card-excerpt">Domina los dos algoritmos esenciales: Búsqueda en Amplitud (BFS) y Búsqueda en Profundidad (DFS) con casos de uso avanzados.</p>
+                        <div class="post-card-meta">
+                            <span>🔍 Parte 3 de 3</span>
+                            <a href="posts/post3.html" class="read-more">Leer más →</a>
+                        </div>
+                    </div>
+                </article>
+            </section>
+
+            <!-- ABOUT SECTION -->
+            <section class="article" style="text-align: center;">
+                <h2 style="color: var(--primary-color); margin-bottom: 1rem;">¿Por qué estudiar Grafos?</h2>
+                <p>Los grafos son fundamentales en ciencias de la computación y aparecen en innumerables aplicaciones:</p>
+                <ul style="list-style: none; margin-top: 1rem; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem;">
+                    <li>🗺️ Sistemas de navegación</li>
+                    <li>🌐 Redes sociales</li>
+                    <li>💻 Redes de computadoras</li>
+                    <li>🎮 Videojuegos</li>
+                    <li>📱 Aplicaciones móviles</li>
+                    <li>🤖 Inteligencia artificial</li>
+                </ul>
+            </section>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="index.html">Inicio</a>
+                <a href="posts/post1.html">Post 1</a>
+                <a href="posts/post2.html">Post 2</a>
+                <a href="posts/post3.html">Post 3</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Blog Técnico - Estructura de Datos: Grafos</p>
+                <p>Creado por Deisy Katherinne Ramirez</p>
+                <p>Estructuras de datos II - UNINCCA</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN SCROLL TO TOP FLOTANTE -->
+    <button id="scrollToTopBtn" title="Volver al inicio">⬆️</button>
+
+    <script src="js/script.js"></script>
+</body>
+</html>

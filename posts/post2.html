@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post 2 - Representación de Grafos | Blog Técnico</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header>
+        <div class="header-container">
+            <div class="logo">
+                <span class="logo-icon">📊</span>
+                <span>Blog Técnico - Estructura de Datos: Grafos</span>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="../index.html">Inicio</a></li>
+                    <li><a href="post1.html">Post 1</a></li>
+                    <li><a href="post2.html">Post 2</a></li>
+                    <li><a href="post3.html">Post 3</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="container">
+            <article class="article">
+                <!-- HEADER DEL ARTÍCULO -->
+                <div class="article-header">
+                    <h1 class="article-title">💾 Representación de Grafos en Memoria</h1>
+                    <div class="article-meta">
+                        <span>📅 Publicado: 3 de Diciembre, 2025</span>
+                        <span>⏱️ Lectura: 10 minutos</span>
+                        <span>💾 Parte 2 de 3</span>
+                    </div>
+                </div>
+
+                <!-- CONTENIDO -->
+                <div class="article-content">
+                    <h2>¿Cómo Almacenar un Grafo?</h2>
+                    <p>
+                        Una de las decisiones más importantes al trabajar con grafos es cómo representarlos en la memoria de la computadora. 
+                        La elección de la representación afecta directamente a la eficiencia de los algoritmos y el uso de memoria.
+                    </p>
+                    <p>
+                        Existen dos representaciones principales: <strong>Lista de Adyacencia</strong> y <strong>Matriz de Adyacencia</strong>. 
+                        Cada una tiene ventajas y desventajas que las hacen más o menos apropiadas según el caso de uso.
+                    </p>
+
+                    <div class="info-box warning">
+                        <strong>⚠️ Importante:</strong>
+                        La elección entre lista y matriz de adyacencia depende de la densidad del grafo (número de aristas) 
+                        y las operaciones que necesites realizar con más frecuencia.
+                    </div>
+
+                    <h2>1. Lista de Adyacencia</h2>
+                    <p>
+                        La <strong>lista de adyacencia</strong> es una representación donde cada vértice tiene una lista de todos 
+                        los vértices a los que está directamente conectado.
+                    </p>
+
+                    <h3>Estructura</h3>
+                    <p>
+                        Se puede implementar como un array de listas (o diccionarios) donde cada índice i contiene la lista 
+                        de adyacentes del vértice i.
+                    </p>
+
+                    <div class="diagram-container">
+                        <svg id="graph-for-adjacency" width="500" height="350" style="border: 2px solid #2563eb; border-radius: 0.5rem; background: white;"></svg>
+                    </div>
+
+                    <p style="text-align: center; color: var(--text-light); margin-top: 1rem;">
+                        Grafo de ejemplo para representar en lista de adyacencia
+                    </p>
+
+                    <h3>Ejemplo Visual: Lista de Adyacencia</h3>
+                    <div class="code-block">
+A → [B, D]
+B → [A, C]
+C → [B, D]
+D → [A, C]
+                    </div>
+
+                    <h3>Implementación en Python</h3>
+                    <div class="code-block">
+# Representación con diccionario
+graph = {
+    'A': ['B', 'D'],
+    'B': ['A', 'C'],
+    'C': ['B', 'D'],
+    'D': ['A', 'C']
+}
+
+# Representación con lista de adyacencia
+class GraphList:
+    def __init__(self, vertices):
+        self.V = vertices
+        self.graph = [[] for _ in range(vertices)]
+    
+    def add_edge(self, u, v):
+        self.graph[u].append(v)
+        self.graph[v].append(u)  # Para grafo no dirigido
+                    </div>
+
+                    <h3>Ventajas de Lista de Adyacencia</h3>
+                    <ul>
+                        <li>✅ <strong>Eficiencia de espacio:</strong> Ocupa O(V + A) donde V es vértices y A es aristas</li>
+                        <li>✅ Ideal para <strong>grafos dispersos</strong> (pocos aristas respecto a V²)</li>
+                        <li>✅ Fácil de iterar sobre los vecinos de un vértice</li>
+                        <li>✅ Flexible: fácil agregar/eliminar vértices o aristas</li>
+                    </ul>
+
+                    <h3>Desventajas de Lista de Adyacencia</h3>
+                    <ul>
+                        <li>❌ Verificar si existe una arista entre dos vértices toma O(grado) en promedio</li>
+                        <li>❌ Requiere acceso secuencial para verificar conexión</li>
+                    </ul>
+
+                    <div class="info-box note">
+                        <strong>💡 Caso de Uso:</strong>
+                        La lista de adyacencia es excelente para redes sociales, mapas de navegación, 
+                        y cualquier grafo donde el número de aristas es significativamente menor que V².
+                    </div>
+
+                    <h2>2. Matriz de Adyacencia</h2>
+                    <p>
+                        La <strong>matriz de adyacencia</strong> es una representación bidimensional donde cada elemento 
+                        matriz[i][j] indica si existe una arista entre el vértice i y el vértice j.
+                    </p>
+
+                    <h3>Estructura</h3>
+                    <p>
+                        Es una matriz de tamaño V × V donde:
+                    </p>
+                    <ul>
+                        <li>matriz[i][j] = 1 (o peso) si existe arista entre i y j</li>
+                        <li>matriz[i][j] = 0 si no existe arista</li>
+                    </ul>
+
+                    <h3>Ejemplo Visual: Matriz de Adyacencia (mismo grafo)</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>A</th>
+                                <th>B</th>
+                                <th>C</th>
+                                <th>D</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>A</strong></td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>B</strong></td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                            <tr>
+                                <td><strong>C</strong></td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                            </tr>
+                            <tr>
+                                <td><strong>D</strong></td>
+                                <td>1</td>
+                                <td>0</td>
+                                <td>1</td>
+                                <td>0</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h3>Implementación en Python</h3>
+                    <div class="code-block">
+# Representación con matriz
+class GraphMatrix:
+    def __init__(self, vertices):
+        self.V = vertices
+        # Inicializar matriz con 0s
+        self.graph = [[0] * vertices for _ in range(vertices)]
+    
+    def add_edge(self, u, v, weight=1):
+        self.graph[u][v] = weight
+        self.graph[v][u] = weight  # Para grafo no dirigido
+    
+    def has_edge(self, u, v):
+        return self.graph[u][v] != 0
+    
+    def get_weight(self, u, v):
+        return self.graph[u][v]
+
+# Crear e inicializar
+g = GraphMatrix(4)
+g.add_edge(0, 1)  # A-B
+g.add_edge(0, 3)  # A-D
+g.add_edge(1, 2)  # B-C
+g.add_edge(2, 3)  # C-D
+                    </div>
+
+                    <h3>Ventajas de Matriz de Adyacencia</h3>
+                    <ul>
+                        <li>✅ <strong>Verificación O(1):</strong> Comprobar si existe arista entre u y v es constante</li>
+                        <li>✅ Excelente para <strong>grafos densos</strong> (muchas aristas)</li>
+                        <li>✅ Fácil de implementar algoritmos como Floyd-Warshall</li>
+                        <li>✅ Soporte directo para pesos en aristas</li>
+                    </ul>
+
+                    <h3>Desventajas de Matriz de Adyacencia</h3>
+                    <ul>
+                        <li>❌ <strong>Eficiencia de espacio:</strong> Ocupa O(V²) sin importar el número de aristas</li>
+                        <li>❌ Consume mucha memoria para grafos dispersos</li>
+                        <li>❌ Iterar sobre los vecinos de un vértice requiere O(V)</li>
+                    </ul>
+
+                    <div class="info-box note">
+                        <strong>💡 Caso de Uso:</strong>
+                        La matriz de adyacencia es ideal para grafos densos, algoritmos que requieren búsquedas rápidas 
+                        de aristas, y problemas como el viajante de comercio (TSP).
+                    </div>
+
+                    <h2>Comparativa: Lista vs Matriz</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Operación</th>
+                                <th>Lista de Adyacencia</th>
+                                <th>Matriz de Adyacencia</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Espacio</td>
+                                <td>O(V + A)</td>
+                                <td>O(V²)</td>
+                            </tr>
+                            <tr>
+                                <td>Verificar arista (u, v)</td>
+                                <td>O(grado u)</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Obtener vecinos de u</td>
+                                <td>O(grado u)</td>
+                                <td>O(V)</td>
+                            </tr>
+                            <tr>
+                                <td>Agregar arista</td>
+                                <td>O(1)</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Eliminar arista</td>
+                                <td>O(grado u)</td>
+                                <td>O(1)</td>
+                            </tr>
+                            <tr>
+                                <td>Mejor para</td>
+                                <td>Grafos dispersos</td>
+                                <td>Grafos densos</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>¿Cuál Elegir?</h2>
+                    <div class="info-box success">
+                        <strong>✅ Usa Lista de Adyacencia si:</strong>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>El grafo es disperso (pocas aristas)</li>
+                            <li>Necesitas iterar sobre vecinos frecuentemente</li>
+                            <li>Memoria es una restricción crítica</li>
+                            <li>Trabajas con redes dinámicas (agregar/eliminar nodos)</li>
+                        </ul>
+                    </div>
+
+                    <div class="info-box success">
+                        <strong>✅ Usa Matriz de Adyacencia si:</strong>
+                        <ul style="margin-top: 0.5rem;">
+                            <li>El grafo es denso (muchas aristas)</li>
+                            <li>Necesitas verificar rápidamente si existe una arista</li>
+                            <li>Usarás algoritmos como Floyd-Warshall o Johnson</li>
+                            <li>Trabajas con pesos complejos en aristas</li>
+                        </ul>
+                    </div>
+
+                    <h2>Importancia de Elegir la Representación Correcta</h2>
+                    <p>
+                        La elección correcta de representación puede significar la diferencia entre un algoritmo que se ejecuta 
+                        en milisegundos y uno que tarda minutos. Por ejemplo:
+                    </p>
+                    <ul>
+                        <li><strong>En redes sociales:</strong> Con millones de usuarios pero relaciones limitadas, la lista de adyacencia 
+                        es esencial para no colapsar la memoria.</li>
+                        <li><strong>En análisis de circuitos:</strong> Con muchas conexiones posibles, la matriz es más eficiente.</li>
+                        <li><strong>En juegos:</strong> Para mapas enormes, la lista de adyacencia permite actualizaciones rápidas.</li>
+                    </ul>
+
+                    <h2>Ejemplos Prácticos Comparativos</h2>
+
+                    <h3>Ejemplo 1: Red Social Pequeña (Lista vs Matriz)</h3>
+                    <p><strong>Escenario:</strong> 5 usuarios con 6 conexiones de amistad</p>
+
+                    <h4>Con Lista de Adyacencia:</h4>
+                    <div class="code-block">
+# Uso de memoria: ~11 elementos (5 nodos + 6 aristas bidireccionales)
+usuarios = {
+    'Juan': ['María', 'Carlos'],
+    'María': ['Juan', 'Ana'],
+    'Carlos': ['Juan', 'Luis'],
+    'Ana': ['María', 'Luis'],
+    'Luis': ['Carlos', 'Ana']
+}
+
+# Buscar amigos de Juan: O(1) - acceso inmediato
+amigos_juan = usuarios['Juan']  # Resultado: ['María', 'Carlos']
+
+# Verificar si María es amiga de Juan: O(grado de María)
+es_amigo = 'Juan' in usuarios['María']  # Resultado: True
+                    </div>
+
+                    <h4>Con Matriz de Adyacencia:</h4>
+                    <div class="code-block">
+# Uso de memoria: 5×5 = 25 elementos (matriz completa)
+#      Juan María Carlos Ana Luis
+# Juan  0    1     1      0   0
+# María 1    0     0      1   0
+# Carlos 1   0     0      0   1
+# Ana   0    1     0      0   1
+# Luis  0    0     1      1   0
+
+# Verificar si María es amiga de Juan: O(1) - acceso directo
+es_amigo = matriz[índice_Juan][índice_María]  # Resultado: 1 (True)
+
+# Buscar amigos de Juan: O(V) - recorrer toda la fila
+amigos_juan = [usuarios[i] for i in range(5) if matriz[Juan][i] == 1]
+                    </div>
+
+                    <h3>Ejemplo 2: Red Social Grande (1000 usuarios, 5000 conexiones)</h3>
+                    <div class="code-block">
+# LISTA DE ADYACENCIA:
+Memoria = 1000 + 2×5000 = 11,000 elementos
+
+# MATRIZ DE ADYACENCIA:
+Memoria = 1000 × 1000 = 1,000,000 elementos
+
+# ¡La lista usa 98.9% menos memoria!
+# Por eso Facebook, Twitter, LinkedIn usan listas de adyacencia
+                    </div>
+
+                    <h3>Ejemplo 3: Cálculo de Camino Más Corto (Floyd-Warshall)</h3>
+                    <p>
+                        El algoritmo Floyd-Warshall funciona mejor con matriz porque necesita acceso O(1) a pesos.
+                    </p>
+                    <div class="code-block">
+# Floyd-Warshall con Matriz de Adyacencia
+def floyd_warshall(matriz):
+    """
+    Encuentra camino más corto entre todos los pares
+    Eficiente: O(V³) con matriz
+    """
+    n = len(matriz)
+    dist = [fila[:] for fila in matriz]  # Copiar matriz
+    
+    for k in range(n):
+        for i in range(n):
+            for j in range(n):
+                # Acceso O(1) a matriz[i][j]
+                dist[i][j] = min(dist[i][j], dist[i][k] + dist[k][j])
+    
+    return dist
+
+# Con lista de adyacencia sería mucho más lento (búsquedas O(grado))
+                    </div>
+
+                    <h3>Ejemplo 4: Iteración sobre Vecinos (BFS)</h3>
+                    <p>
+                        En BFS, iterar sobre vecinos es una operación crítica.
+                    </p>
+                    <div class="code-block">
+# Con Lista de Adyacencia: MUY EFICIENTE
+def bfs_lista(grafo, inicio):
+    visitados = {inicio}
+    cola = [inicio]
+    
+    while cola:
+        nodo = cola.pop(0)
+        # Iterar solo sobre vecinos reales - O(grado del nodo)
+        for vecino in grafo[nodo]:  # ← ¡Solo vecinos!
+            if vecino not in visitados:
+                visitados.add(vecino)
+                cola.append(vecino)
+
+
+# Con Matriz de Adyacencia: MENOS EFICIENTE
+def bfs_matriz(matriz, inicio):
+    visitados = {inicio}
+    cola = [inicio]
+    n = len(matriz)
+    
+    while cola:
+        nodo = cola.pop(0)
+        # Revisar TODA la fila - O(V)
+        for j in range(n):  # ← ¡Todos los nodos!
+            if matriz[nodo][j] == 1 and j not in visitados:
+                visitados.add(j)
+                cola.append(j)
+                    </div>
+
+                    <h3>Ejemplo 5: Análisis de Complejidad Real</h3>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Escenario</th>
+                                <th>Recomendación</th>
+                                <th>Razón</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Red social con 100M usuarios y 500M conexiones</td>
+                                <td>Lista</td>
+                                <td>Ratio: 1 conexión por usuario en promedio. Matriz: 100M² = enorme.</td>
+                            </tr>
+                            <tr>
+                                <td>Grafo de un tablero de ajedrez (64 casillas)</td>
+                                <td>Matriz</td>
+                                <td>Cada casilla puede conectarse a ~8 vecinos. Matriz: 64²=4096 (manejable).</td>
+                            </tr>
+                            <tr>
+                                <td>Análisis de proteínas (10K proteínas, 50K interacciones)</td>
+                                <td>Lista</td>
+                                <td>0.5% densidad. Lista: 110K vs Matriz: 100M.</td>
+                            </tr>
+                            <tr>
+                                <td>Análisis de circuito con 1000 componentes</td>
+                                <td>Depende</td>
+                                <td>Si circuito es complejo: Matriz. Si es modular: Lista.</td>
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <h2>Conclusión</h2>
+                    <p>
+                        La elección entre lista y matriz de adyacencia es una decisión fundamental que impacta 
+                        el rendimiento de tus algoritmos. Ambas representaciones son válidas y útiles según el contexto.
+                    </p>
+
+                    <div class="btn-group">
+                        <a href="post1.html" class="btn btn-secondary">← Post 1</a>
+                        <a href="../index.html" class="btn btn-secondary">Volver al Inicio</a>
+                        <a href="post3.html" class="btn btn-primary">Post 3 →</a>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-links">
+                <a href="../index.html">Inicio</a>
+                <a href="post1.html">Post 1</a>
+                <a href="post2.html">Post 2</a>
+                <a href="post3.html">Post 3</a>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 Blog Técnico - Estructura de Datos: Grafos</p>
+                <p>Creado por Deisy Katherinne Ramirez | Estructuras de datos II - UNINCCA</p>
+                <p>Parte 2 de 3 - Representación de Grafos</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- BOTÓN SCROLL TO TOP FLOTANTE -->
+    <button id="scrollToTopBtn" title="Volver al inicio">⬆️</button>
+
+    <script src="../js/script.js"></script>
+    <script>
+        // Dibujar grafo de ejemplo para representación
+        const graphNodes = [
+            { x: 100, y: 100, label: 'A' },
+            { x: 300, y: 100, label: 'B' },
+            { x: 300, y: 250, label: 'C' },
+            { x: 100, y: 250, label: 'D' }
+        ];
+
+        const graphEdges = [
+            { from: 0, to: 1, directed: false },
+            { from: 0, to: 3, directed: false },
+            { from: 1, to: 2, directed: false },
+            { from: 2, to: 3, directed: false }
+        ];
+
+        drawSimpleGraph('graph-for-adjacency', graphNodes, graphEdges);
+    </script>
+</body>
+</html>
